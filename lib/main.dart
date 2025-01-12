@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_feridacare/screens/new_assessment_screen.dart';
+import 'package:front_feridacare/screens/order_view_screen.dart';
 import 'package:get/get.dart';
 import 'controllers/auth_controller.dart';
 import 'screens/login_screen.dart';
@@ -23,7 +24,10 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/login', page: () => LoginScreen()),
         GetPage(name: '/register', page: () => RegisterScreen()),
         GetPage(name: '/home', page: () => HomeScreen()),
-        GetPage(name: '/newassessment', page: ()=>SolicitacaoAvaliacaoPage())
+        GetPage(name: '/newassessment', page: ()=>SolicitacaoAvaliacaoPage()),
+        GetPage(name: '/orderview', page: () => VisualizarPedidosPage()),
+
+        
       ],
       theme: ThemeData(
         primarySwatch: Colors.teal,

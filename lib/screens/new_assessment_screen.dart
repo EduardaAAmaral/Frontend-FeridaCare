@@ -1,5 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:front_feridacare/screens/home_screen.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SolicitacaoAvaliacaoPage extends StatefulWidget {
@@ -29,18 +32,21 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
       return;
     }
 
-    // Simular envio
-    print("Solicitação Enviada:");
-    print("Nome do Paciente: $nomePaciente");
-    print("Tipo de Ferida: $_tipoFerida");
-    print("Sugestão de Curativo: $sugestaoCurativo");
-    print("Observação: $observacao");
+      // Criar o pedido
+      final novoPedido = {
+        'nome': nomePaciente,
+        'tipo': _tipoFerida!,
+        'cobertura': sugestaoCurativo,
+        'status': 'Pendente',
+      };
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text("Solicitação enviada com sucesso!"),
       ),
     );
+
+    Get.toNamed('/orderview', arguments: [novoPedido]);
   }
 
   String? _imageName;

@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                // Navegar para "Visualizar seu Pedidos"
+                Get.toNamed('/order_view');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.teal,
