@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                Get.toNamed('/order_view');
+                Get.toNamed('/orderview');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.teal,

@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:front_feridacare/screens/home_screen.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:get/get.dart';
 
 class SolicitacaoAvaliacaoPage extends StatefulWidget {
   @override
@@ -17,11 +15,9 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
   String? _tipoFerida;
   
   void _enviarSolicitacao() {
-    // Implementar lógica para enviar solicitação
     final nomePaciente = _nomePacienteController.text;
     final sugestaoCurativo = _sugestaoCurativoController.text;
     final observacao = _observacaoController.text;
-    
 
     if (nomePaciente.isEmpty || _tipoFerida == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -32,13 +28,12 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
       return;
     }
 
-      // Criar o pedido
-      final novoPedido = {
-        'nome': nomePaciente,
-        'tipo': _tipoFerida!,
-        'cobertura': sugestaoCurativo,
-        'status': 'Pendente',
-      };
+    final novoPedido = {
+      'nome': nomePaciente,
+      'tipo': _tipoFerida!,
+      'cobertura': sugestaoCurativo,
+      'status': 'Pendente',
+    };
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -58,8 +53,8 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
 
     if (pickedFile != null) {
       setState(() {
-        _selectedImage = File(pickedFile.path); // Atualiza o estado com a imagem selecionada
-        _imageName = pickedFile.name; // Atualiza o nome da imagem
+        _selectedImage = File(pickedFile.path);
+        _imageName = pickedFile.name;
       });
     } else {
       print('Nenhuma imagem selecionada.');
@@ -103,7 +98,7 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
                     child: Text("Crônica"),
                   ),
                   DropdownMenuItem(
-                    value: "Ferimento por pressão ",
+                    value: "Ferimento por pressão",
                     child: Text("Ferimento por pressão"),
                   ),
                 ],
@@ -145,8 +140,8 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 8), // Espaçamento entre o container e o texto
-              if (_imageName != null) // Mostra o nome apenas se a imagem foi selecionada
+              SizedBox(height: 8),
+              if (_imageName != null)
                 Text(
                   'Imagem selecionada: $_imageName',
                   style: TextStyle(
