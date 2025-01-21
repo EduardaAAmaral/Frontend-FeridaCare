@@ -13,7 +13,11 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
   final TextEditingController _sugestaoCurativoController = TextEditingController();
   final TextEditingController _observacaoController = TextEditingController();
   String? _tipoFerida;
-  
+
+  String? _imageName;
+  File? _selectedImage;
+  final ImagePicker _picker = ImagePicker();
+
   void _enviarSolicitacao() {
     final nomePaciente = _nomePacienteController.text;
     final sugestaoCurativo = _sugestaoCurativoController.text;
@@ -33,6 +37,7 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
       'tipo': _tipoFerida!,
       'cobertura': sugestaoCurativo,
       'status': 'Pendente',
+      'observacao': observacao,
     };
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -44,10 +49,6 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
     Get.toNamed('/orderview', arguments: [novoPedido]);
   }
 
-  String? _imageName;
-  File? _selectedImage;
-  final ImagePicker _picker = ImagePicker();
-
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
@@ -57,7 +58,9 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
         _imageName = pickedFile.name;
       });
     } else {
-      print('Nenhuma imagem selecionada.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Nenhuma imagem foi selecionada.")),
+      );
     }
   }
 
@@ -77,7 +80,7 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
               TextField(
                 controller: _nomePacienteController,
                 decoration: InputDecoration(
-                  labelText: "Nome do Paciente",
+                  labelText: "Nome do Paciente *",
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -108,7 +111,7 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
                   });
                 },
                 decoration: InputDecoration(
-                  labelText: "Tipo da Ferida",
+                  labelText: "Tipo da Ferida *",
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -122,9 +125,7 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
               ),
               SizedBox(height: 16),
               GestureDetector(
-                onTap: () {
-                  _pickImage();
-                },
+                onTap: _pickImage,
                 child: Container(
                   height: 150,
                   decoration: BoxDecoration(
@@ -132,11 +133,16 @@ class _SolicitacaoAvaliacaoPageState extends State<SolicitacaoAvaliacaoPage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(
-                    child: Icon(
-                      Icons.cloud_upload,
-                      size: 50,
-                      color: Colors.grey,
-                    ),
+                    child: _selectedImage == null
+                        ? Icon(
+                            Icons.cloud_upload,
+                            size: 50,
+                            color: Colors.grey,
+                          )
+                        : Image.file(
+                            _selectedImage!,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
               ),

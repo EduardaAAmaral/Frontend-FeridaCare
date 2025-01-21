@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_feridacare/screens/forgot_my_password_screen.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/auth_controller.dart';
@@ -71,9 +72,16 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 10),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Text(
-                        'Esqueceu sua senha?',
-                        style: TextStyle(color: Colors.blue),
+                      child: TextButton(
+                        onPressed: () {
+                          Get.toNamed('/forgotmypassword');
+                        },
+                        child: Text(
+                          'Esqueceu sua senha?',
+                          style: TextStyle(
+                            color: Colors.blue,
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 20),
