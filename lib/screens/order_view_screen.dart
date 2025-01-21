@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front_feridacare/screens/home_screen.dart';
 import 'package:front_feridacare/screens/notificacoes_page.dart';
 import 'package:front_feridacare/screens/salvar_page.dart';
+import 'package:front_feridacare/widgets/home_widget.dart';
 
 class VisualizarPedidosPage extends StatefulWidget {
   @override
@@ -68,7 +69,7 @@ class _VisualizarPedidosPageState extends State<VisualizarPedidosPage> {
     },
   ];
 
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   final List<Widget> _pages = [
     HomeScreen(),

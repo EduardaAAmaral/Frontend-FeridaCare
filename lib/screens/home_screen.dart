@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: _selectedIndex == 0
-          ? _buildHomeContent()
+          ? buildHomeContent()
           : _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildHomeContent() {
+  Widget buildHomeContent() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
